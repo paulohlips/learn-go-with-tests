@@ -7,5 +7,9 @@ func main() {
 }
 
 func Hello(name string) string{
-	return "Hello, " + name
+	if name == "" {
+		return "Hello, World"
+	} else {
+		return "Hello, " + name
+	}
 }
