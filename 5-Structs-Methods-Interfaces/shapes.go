@@ -19,6 +19,15 @@ type Shape interface {
 	Area() float64
 }
 
+type Triangle struct {
+	Base float64
+	Height float64
+}
+
+func (t Triangle) Area() float64 {
+	return (float64(t.Base)*float64(t.Height))/2
+}
+
 func (c Circle) Area() float64 {
 	return math.Pi * math.Pow(c.Radius, 2)
 }
