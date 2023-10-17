@@ -3,15 +3,31 @@ package pointersanderrors
 import "testing"
 
 func TestWallet(t *testing.T) {
-	t.Run("deposit", func(t *testing.T) {
-		wallet := Wallet{}
-		wallet.Deposit(Bitcoin(10))
-
+	assertBalance := func(t testing.TB, wallet Wallet, expected Bitcoin) {
 		got := wallet.Balance()
-		expected := Bitcoin(10)
 
 		if got != expected {
 			t.Errorf("got %s but expected %s", got, expected)
 		}
+	}
+	t.Run("deposit", func(t *testing.T) {
+		wallet := Wallet{}
+		wallet.Deposit(Bitcoin(10))
+
+		wallet.Balance()
+		expected := Bitcoin(10)
+
+		assertBalance(t, wallet, expected)
+	})
+
+	t.Run("withdraw", func(t *testing.T) {
+		wallet := Wallet{balance: Bitcoin(20)}
+		wallet.Withdraw(Bitcoin(10))
+
+		wallet.Balance()
+		expected := Bitcoin(10)
+
+		assertBalance(t, wallet, expected)
+
 	})
 }
